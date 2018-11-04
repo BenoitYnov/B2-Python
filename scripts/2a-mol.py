@@ -1,17 +1,21 @@
 #!/usr/bin/python3.6
-#EXERCICE : 1d-mol.py
-#DESCRIPTION : Jeu du plus ou moins
+#EXERCICE : 2a-mol.py
+#DESCRIPTION : Jeu du plus ou moins avec fichier externe "démon"
 #AUTEUR : Galmot
-#DATE : 23/10/18
+#DATE : 04/11/18
 
 import random
 import signal
 import sys
 from time import sleep
 
+#Intercept le Ctrl+c
+signal.signal(signal.SIGINT, ctrl)
+
 #generation du nombre aléatoire
 nombrealeatoire=random.randint(0, 100)
 
+#fichier communiquant avec 
 file = open('deamonjeu.txt', 'w').write("")
 #fonction quitter
 def quitter():
@@ -26,8 +30,6 @@ def solution():
 def ctrl(sig, frame):
 	print("\nvous avez quittez la partie avec ctrl+c")
 	sys.exit(0)
-
-signal.signal(signal.SIGINT, ctrl)
 
 #règle du jeu
 print("Choisir un nombre entre 0 et 100, (q pour quitter)")
