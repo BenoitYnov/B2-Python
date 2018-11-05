@@ -9,14 +9,11 @@ import signal
 import sys
 from time import sleep
 
-#Intercept le Ctrl+c
-signal.signal(signal.SIGINT, ctrl)
-
 #generation du nombre aléatoire
 nombrealeatoire=random.randint(0, 100)
 
 #fichier communiquant avec 
-file = open('deamonjeu.txt', 'w').write("")
+file = open('deamonjeu.txt', 'w').write("Jeu du plus ou moins")
 #fonction quitter
 def quitter():
 	print(' \nleaving ...')
@@ -30,27 +27,33 @@ def solution():
 def ctrl(sig, frame):
 	print("\nvous avez quittez la partie avec ctrl+c")
 	sys.exit(0)
+	
+#Intercept le Ctrl+c
+signal.signal(signal.SIGINT, ctrl)
 
 #règle du jeu
 print("Choisir un nombre entre 0 et 100, (q pour quitter)")
-while True:
-	#l'user entre un nombre
-	nombreuser = open('deamonjeu.txt', 'rt').readline(3)
-	nombreuser = int(nombreuser)
-	#si l'user entre q, alors il quitte la partie
-	nombreuser = open('deamonjeu.txt', 'rt').readline(1)
-	if nombreuser== "q":
+while 1:
+    #Variable int de l'utilisateur
+    nombreuser = open('deamonjeu.txt', 'rt').readline(3)
+    #si l'user entre q, alors il quitte la partie
+    userq = open('deamonjeu.txt', 'rt').readline(1)
+    if userq == "q":
 		#on appelle la fonction quitter
-		quitter()
-		break
-	#si le nombre choisis est égal au nombre aléatoire alors:
-	elif nombreuser == nombrealeatoire:
-		#l'user gagne
-		solution()
-		break
-	#tant que le nombre n'a pas été trouvé, la boucle continue
-	else:
-		if nombreuser > nombrealeatoire:
-			file = open('deamonjeu.txt', 'w').write("c'est moins")
-		else:
-			file = open('deamonjeu.txt', 'w').write("c'est plus")
+        quitter()
+    try:
+        #transforme l'entrée de l'utilisateur en int
+        uservaleur = int(nombreuser)
+        #Si nombre inconnu est plus grand écrit plus grand dans le fichier
+        if uservaleur < nombrealeatoire:
+            file = open('deamonjeu.txt', 'w').write("c'est plus")
+        #Si nombre inconnu est plus petit écrit plus petit dans le fichier
+        elif uservaleur > nombrealeatoire:
+            file = open('deamonjeu.txt', 'w').write("c'est moins")
+        #Si nombre inconnu est trouvé affiche le nombre (nombrealeatoire)
+        elif uservaleur == randomInt:
+            solution()
+            sys.exit(0)
+        #Si user entre autre que int l'ignore
+    except ValueError:
+            sleep(1)
