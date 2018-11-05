@@ -34,7 +34,7 @@ signal.signal(signal.SIGINT, ctrl)
 #règle du jeu
 print("Choisir un nombre entre 0 et 100, (q pour quitter)")
 while 1:
-    #Variable int de l'utilisateur
+    #l'user entre un nombre, 3 caractères maximum
     nombreuser = open('deamonjeu.txt', 'rt').readline(3)
     #si l'user entre q, alors il quitte la partie
     userq = open('deamonjeu.txt', 'rt').readline(1)
@@ -44,13 +44,13 @@ while 1:
     try:
         #transforme l'entrée de l'utilisateur en int
         uservaleur = int(nombreuser)
-        #Si nombre inconnu est plus grand écrit plus grand dans le fichier
+        #si le nombre choisi est plus grand écrit plus grand dans le fichier
         if uservaleur < nombrealeatoire:
             file = open('deamonjeu.txt', 'w').write("c'est plus")
-        #Si nombre inconnu est plus petit écrit plus petit dans le fichier
+        #si le nombre choisi est plus petit écrit plus petit dans le fichier
         elif uservaleur > nombrealeatoire:
             file = open('deamonjeu.txt', 'w').write("c'est moins")
-        #Si nombre inconnu est trouvé affiche le nombre (nombrealeatoire)
+        #si le nombre choisis est égal au nombre aléatoire alors:
         elif uservaleur == randomInt:
             solution()
             sys.exit(0)
