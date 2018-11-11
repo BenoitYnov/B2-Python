@@ -4,6 +4,7 @@
 # Auteur: Galmot
 # Date: 06/11/2018 - 11/11/2018
 
+#Import
 import shutil
 import gzip
 import os
@@ -16,7 +17,7 @@ path_data = os.path.expanduser('~/data/')
 path_save = os.path.expanduser('~/B2-Python_save')
 
 #Fonction :
-#création de l'archive
+#Création de l'archive
 def creeArchive(path, archive):
     if os.access(path, os.R_OK):
         shutil.make_archive(archive, 'gztar', path)
@@ -26,7 +27,7 @@ def suppArchive():
     if os.path.exists(archive + '.tar.gz'):
         os.remove(archive + '.tar.gz')
 
-#quitter le programme
+#Quitter le programme
 def quitter(sig, frame):
     suppArchive()
     sys.exit(0)
@@ -42,11 +43,11 @@ if os.path.isfile(path_data + '/B2-Python_save.tar.gz'):
         archive_exist = gzip.open(path_data+'/B2-Python_save.tar.gz')
         #archive déjà existante
         if archive.read() == archive_exist.read():
-                sys.stdout.write('Le fichier existe déjà')
+                sys.stdout.write('Le fichier existe déjà dans root\data\ \n')
                 os.remove(path_save)
         #archive sauvegarder
         else:
-                sys.stdout.write('Sauvegarde réussi')
+                sys.stdout.write('Sauvegarde réussi \n')
                 os.remove(path_data+'/B2-Python_save.tar.gz')
                 shutil.move(path_save, path_data)
 else:
