@@ -26,6 +26,13 @@ def suppArchive():
     if os.path.exists(archive + '.tar.gz'):
         os.remove(archive + '.tar.gz')
 
+#quitter le programme
+def quitter(sig, frame):
+    suppArchive()
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, quitter)
+
 #Script
 creeArchive(path_directory, path_save)
 path_save += '.tar.gz'
